@@ -4,7 +4,7 @@
     // 但这里的全选框有两个当点击一个之后，这样写的话另外一个不会被选中
     // $(".checkItem").prop("checked", this.checked);
     $(":checkbox").not(this).prop("checked", this.checked);
-    setTotal();
+    // setTotal();
   });
   function setTotal() {
     const checked = $(":checked").not(".checkAll");
@@ -48,23 +48,24 @@
     setNumber(inp, newNumber);
   });
   // 数量input监听
-  $("input").change(function () {
-    const inp = $(this);
-    const value = $(this).val();
-    if (!value || value == 0) {
-      $(this).val(1);
-    }
-    setNumber(inp, value);
-  });
+  // $("input").change(function () {
+  //   const inp = $(this);
+  //   const value = $(this).val();
+  //   if (!value || value == 0) {
+  //     $(this).val(1);
+  //   }
+  //   const newvalue = +value;
+  //   setNumber(inp, newvalue);
+  // });
 
   // 价格计算
   function setNumber(inp, number) {
-    if (number < 1) {
+    if (number <= 1) {
       number = 1;
     }
     inp.val(number);
     const totalNumber = inp.parents(".item").find(".sum em");
-    const unitPrice = inp
+    const unitPrice = +inp
       .parents(".item")
       .find(".price em")
       .text()
@@ -77,17 +78,19 @@
   $(".del a").click(function (e) {
     e.preventDefault();
     $(this).parents(".item").remove();
+    setTotal();
   });
 
   // 删除选中商品
   $(".delChecked").click(function (e) {
     e.preventDefault();
     $(":checked").not(".checkAll").parents(".item").remove();
+    setTotal();
   });
   // 清空购物车
   $(".clearAll").click(function (e) {
     e.preventDefault();
-    const a = $(".checkItem").parents(".item").remove();
-    console.log(a);
+    $(".checkItem").parents(".item").remove();
+    setTotal();
   });
 })();
