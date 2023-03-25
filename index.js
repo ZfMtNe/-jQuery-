@@ -47,16 +47,16 @@
     const newNumber = +inp.val() + 1;
     setNumber(inp, newNumber);
   });
-  // 数量input监听
-  // $("input").change(function () {
-  //   const inp = $(this);
-  //   const value = $(this).val();
-  //   if (!value || value == 0) {
-  //     $(this).val(1);
-  //   }
-  //   const newvalue = +value;
-  //   setNumber(inp, newvalue);
-  // });
+  数量input监听;
+  $("input").change(function () {
+    const inp = $(this);
+    const value = $(this).val();
+    if (!value || value == 0) {
+      $(this).val(+1);
+    }
+    const newvalue = +value;
+    setNumber(inp, newvalue);
+  });
 
   // 价格计算
   function setNumber(inp, number) {
